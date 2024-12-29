@@ -32,7 +32,7 @@
 - Have an [AWS account](https://aws.amazon.com/console/)   
 
 
- ##  Step 1: 
+ ##  Step 1: Setup Jenkins
 <img src=""/>
 
 <br/>  We will <br/>
