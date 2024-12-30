@@ -1,7 +1,8 @@
 terraform {
   backend "s3" {
-    bucket = "dev-proj-1-jenkins-remote-state-bucket-123456"
-    key    = "devops-project-1/jenkins/terraform.tfstate"
-    region = "us-east-1"  # Changed from eu-west-1 to us-east-1
+    bucket         = "dev-proj-1-jenkins-remote-state-bucket-123456"
+    key            = "terraform/state"
+    region         = "ap-south-1" # Update this to match the bucket's actual region
+    encrypt        = true
   }
 }
