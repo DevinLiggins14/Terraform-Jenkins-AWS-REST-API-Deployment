@@ -132,10 +132,10 @@ The `Application Load Balancer (ALB) Module` sets up a load balancer to distribu
 
 <br/> Once the necessary terraform modules, variables, and files have been correctly configured with the proper credentials ans AWS region it is now time to run terraform init. To follow along clone this repository into a local directory of choice and ensure the aws-key pair, iam user, and regions are correct. Also install the [aws cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) to run from CLI. <br/>
 
-<img src=""/>
+<img src="https://github.com/user-attachments/assets/e1e3350f-8678-42e1-8003-591446fbf543"/>
 
 
-<br/> <br/> 
+<br/> For this project I am also using an S3 bucket for the terraform backend to store data. The S3 bucket provides a centralized, remote location for managing infrastructure state, enabling collaboration among team members and ensuring consistency. <br/> 
 
 
 <br/> <br/>
