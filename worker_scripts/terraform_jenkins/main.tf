@@ -3,7 +3,7 @@ module "networking" {
   vpc_cidr             = var.vpc_cidr
   vpc_name             = var.vpc_name
   cidr_public_subnet   = var.cidr_public_subnet
-  eu_availability_zone = var.eu_availability_zone
+  us_availability_zone = var.us_availability_zone
   cidr_private_subnet  = var.cidr_private_subnet
 }
 
@@ -11,7 +11,7 @@ module "security_group" {
   source              = "./security-groups"
   ec2_sg_name         = "SG for EC2 to enable SSH(22), HTTPS(443) and HTTP(80)"
   vpc_id              = module.networking.dev_proj_1_vpc_id
-  ec2_jenkins_sg_name = "Allow port 8080 for jenkins"
+  ec2_jenkins_sg_name = "Allow port 8080 for Jenkins"
 }
 
 module "jenkins" {
@@ -54,14 +54,14 @@ module "alb" {
   lb_target_group_attachment_port = 8080
 }
 
-*/module "hosted_zone" {
+/*module "hosted_zone" {
   source          = "./hosted-zone"
   domain_name     = "Domain of choice"
   aws_lb_dns_name = module.alb.aws_lb_dns_name
   aws_lb_zone_id  = module.alb.aws_lb_zone_id
 }
 
-*/module "aws_ceritification_manager" {
+/*module "aws_ceritification_manager" {
   source         = "./certificate-manager"
   domain_name    = "Domain of choice"
   hosted_zone_id = module.hosted_zone.hosted_zone_id
