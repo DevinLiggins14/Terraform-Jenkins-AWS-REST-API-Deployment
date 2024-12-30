@@ -36,12 +36,22 @@
 - Install [terraform](https://developer.hashicorp.com/terraform/install).  
 
 
- ##  Step 1: Setup Jenkins
-<img src=""/>
+ ##  Step 1: Setup Jenkins and AWS network
+<img src="https://github.com/user-attachments/assets/3386eb7e-3373-40d7-b5e4-7fc64f9023f8"/>
 
-<br/>  We will <br/>
-<br/> We will <br/> 
-<br/>  <br/>
+<br/>  First we will use terraform to configure and create a VPC within AWS that will support and install Jenkins on an EC2 instance. <br/>
+<br/> We will use the following `main.tf` file to provision a modular, secure, and scalable infrastructure on AWS for hosting Jenkins with networking, security, and load balancing configurations. <br/> 
+
+
+<br/> Within this main.tf file the Networking Module establishes the foundational infrastructure by creating a VPC with assigned CIDR blocks for its IP range. It also defines public and private subnets within the VPC and specifies the availability zone for resource placement. These subnets and the VPC enable isolated and controlled networking for the application.
+
+The Security Group Module configures access control by defining security groups. One security group permits SSH (port 22), HTTP (port 80), and HTTPS (port 443) traffic for general use, while another allows traffic specifically on port 8080 for Jenkins. These security groups ensure that only authorized traffic can reach the resources in the VPC.
+
+The Jenkins Module provisions an EC2 instance to host Jenkins. It uses a predefined AMI and sets the instance type to t2.medium. The instance is placed in the first public subnet, and a public key is provided for secure SSH access. Security groups are attached to the instance to enforce network rules, and a user data script is executed during initialization to automatically install Jenkins.
+
+The Load Balancer Target Group Module creates a target group to route HTTP traffic on port 8080 to the Jenkins EC2 instance. This target group ensures that incoming requests are forwarded correctly within the VPC.
+
+The Application Load Balancer (ALB) Module sets up a load balancer to distribute traffic. It is configured as an internal application load balancer, attached to the public subnets, and secured with the appropriate security groups. The ALB listens on ports 80 (HTTP) and 443 (HTTPS), forwarding traffic to the target group, which directs it to the Jenkins instance.  <br/>
 
 <img src=""/>
 
