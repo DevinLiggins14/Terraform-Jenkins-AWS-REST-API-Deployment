@@ -124,7 +124,7 @@ The `Load Balancer Target Group Module` creates a target group to route HTTP tra
 The `Application Load Balancer (ALB) Module` sets up a load balancer to distribute traffic. It is configured as an internal application load balancer, attached to the public subnets, and secured with the appropriate security groups. The ALB listens on ports 80 (HTTP) and 443 (HTTPS), forwarding traffic to the target group, which directs it to the Jenkins instance.  <br/>
 
 
-<br/> Also The Certificate Manager and Domain modules are commented out in the main.tf file because they are optional for this project. These modules would be used to manage SSL certificates and set up a custom domain through Route 53, but they are not required for the core Jenkins deployment. They can be enabled if needed for secure HTTPS access and custom domain configurations.
+<br/> Also The `Certificate Manager and Domain modules` are commented out in the main.tf file because they are optional for this project. These modules would be used to manage SSL certificates and set up a custom domain through Route 53, but they are not required for the core Jenkins deployment. They can be enabled if needed for secure HTTPS access and custom domain configurations.
 
 <br/> 
 
