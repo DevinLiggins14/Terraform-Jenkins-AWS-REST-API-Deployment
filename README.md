@@ -36,7 +36,7 @@
 - Install [terraform](https://developer.hashicorp.com/terraform/install).  
 
 
- ##  Step 1: Setup Jenkins and AWS network
+ ##  Step 1: Configure Terraform 
 <img src="https://github.com/user-attachments/assets/3386eb7e-3373-40d7-b5e4-7fc64f9023f8"/>
 
 <br/>  First we will use terraform to configure and create a VPC within AWS that will support and install Jenkins on an EC2 instance. <br/>
@@ -128,8 +128,9 @@ The `Application Load Balancer (ALB) Module` sets up a load balancer to distribu
 
 <br/> 
 
+## Step 2: Initalize Terraform
 
-
+<br/> Once the necessary terraform modules, variables, and files have been correctly configured with the proper credentials ans AWS region it is now time to run terraform init. To follow along clone this repository into a local directory of choice and ensure the aws-key pair, iam user, and regions are correct. <br/>
 
 <img src=""/>
 
