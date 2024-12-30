@@ -137,7 +137,31 @@ The `Application Load Balancer (ALB) Module` sets up a load balancer to distribu
 
 <br/> For this project I am also using an S3 bucket for the terraform backend to store data. The S3 bucket provides a centralized, remote location for managing infrastructure state, enabling collaboration among team members and ensuring consistency. <br/> 
 
+## Step 3: 
 
-<br/> <br/>
+<br/>  <br/>
 
 <img src=""/> 
+<br/> <br/>
+
+## Step :
+
+<br/>  <br/>
+
+<img src=""/> 
+<br/> <br/>
+
+## Step :
+
+<br/>  <br/>
+
+<img src=""/> 
+<br/> <br/>
+
+## Step :
+
+<br/>  <br/>
+
+<img src=""/> 
+<br/> <br/>
+
