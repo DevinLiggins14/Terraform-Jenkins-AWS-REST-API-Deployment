@@ -8,7 +8,7 @@ module "networking" {
 }
 
 module "security_group" {
-  source              = "./security-groups"
+  source              = "./security_groups"
   ec2_sg_name         = "SG for EC2 to enable SSH(22), HTTPS(443) and HTTP(80)"
   vpc_id              = module.networking.dev_proj_1_vpc_id
   ec2_jenkins_sg_name = "Allow port 8080 for Jenkins"
@@ -27,7 +27,7 @@ module "jenkins" {
 }
 
 module "lb_target_group" {
-  source                   = "./load-balancer-target-group"
+  source                   = "./lb_target_group"
   lb_target_group_name     = "jenkins-lb-target-group"
   lb_target_group_port     = 8080
   lb_target_group_protocol = "HTTP"
@@ -36,7 +36,7 @@ module "lb_target_group" {
 }
 
 module "alb" {
-  source                    = "./load-balancer"
+  source                    = "./alb"
   lb_name                   = "dev-proj-1-alb"
   is_external               = false
   lb_type                   = "application"
