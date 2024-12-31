@@ -160,11 +160,12 @@ https://github.com/user-attachments/assets/215aba3d-8c66-46ea-a2ab-5acddfc0d279
 <img src="https://github.com/user-attachments/assets/52b2329b-da8e-47c3-b6f0-48146f548fae"/>
 <img src="https://github.com/user-attachments/assets/13bc4a0d-1086-46fa-8801-194eecfa3c06"/>
 <img src="https://github.com/user-attachments/assets/c1d1112d-ebd9-4ba8-9e5c-4eb11cb708dd"/>
+<img src="https://github.com/user-attachments/assets/1f4b157f-50a2-4999-ac83-f456885225a6"/>
 
 
-### Step :
+### Step 4: Create Jenkins CICD Pipeline
 
-<br/>  <br/>
+<br/> Now the that entire AWS network has been created it is now time to create a Jenkins CICD Pipeline in order to deploy the Python flask REST API application <br/>
 
 <img src=""/>
 
