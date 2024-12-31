@@ -8,7 +8,7 @@ variable "enable_public_ip_address" {}
 variable "user_data_install_jenkins" {}
 
 output "ssh_connection_string_for_ec2" {
-  value = format("ssh -i %s demo@%s", "~/.ssh/jenkins-key.pem", aws_instance.jenkins_ec2_instance.public_ip)
+  value = format("ssh -i %s demo@%s", "~/.ssh/jenkins-key.pem", aws_instance.jenkins_ec2_instance_ip.public_ip)
 }
 
 output "jenkins_ec2_instance_ip" {
