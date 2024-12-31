@@ -148,6 +148,14 @@ The `Application Load Balancer (ALB) Module` sets up a load balancer to distribu
 <br/> Now I will run the command again <br/>
 
 
+
+https://github.com/user-attachments/assets/215aba3d-8c66-46ea-a2ab-5acddfc0d279
+
+
+
+
+
+
 <img src=""/>
 
 <br/>  <br/>
