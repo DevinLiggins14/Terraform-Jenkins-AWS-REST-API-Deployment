@@ -144,7 +144,7 @@ The `Application Load Balancer (ALB) Module` sets up a load balancer to distribu
 
 <img src="https://github.com/user-attachments/assets/08c3527f-0275-4ca9-ad1b-b72a86edaeaf"/> 
 
-<br/> quick error, this stem from the fact that the `us_availability_zone` variable was not declared in my variables.tf file but one for an eu region instead which is why it is important to confirm all file confiurations prior to applying changes <br/>
+<br/> quick error, this stem from the fact that the `us_availability_zone` variable was not declared in my variables.tf file but one for an eu region instead which is why it is important to confirm all file confiurations prior to applying changes. While troubleshooting I also had fixed the jenkins main.tf ec2 connection path, the jenkins_install.sh path in main.tf, and the certificate module in main.tf <br/>
 <br/> Now I will run the command again <br/>
 
 
