@@ -53,7 +53,7 @@ module "networking" {
 }
 
 module "security_group" {
-  source              = "./security-groups"
+  source              = "./security_groups"
   ec2_sg_name         = "SG for EC2 to enable SSH(22), HTTPS(443) and HTTP(80)"
   vpc_id              = module.networking.dev_proj_1_vpc_id
   ec2_jenkins_sg_name = "Allow port 8080 for Jenkins"
@@ -68,11 +68,11 @@ module "jenkins" {
   subnet_id                 = tolist(module.networking.dev_proj_1_public_subnets)[0]
   sg_for_jenkins            = [module.security_group.sg_ec2_sg_ssh_http_id, module.security_group.sg_ec2_jenkins_port_8080]
   enable_public_ip_address  = true
-  user_data_install_jenkins = templatefile("./jenkins-runner-script/jenkins-installer.sh", {})
+  user_data_install_jenkins = templatefile("./jenkins_runner_script/jenkins_installer.sh", {})
 }
 
 module "lb_target_group" {
-  source                   = "./load-balancer-target-group"
+  source                   = "./lb_target_group"
   lb_target_group_name     = "jenkins-lb-target-group"
   lb_target_group_port     = 8080
   lb_target_group_protocol = "HTTP"
@@ -81,7 +81,7 @@ module "lb_target_group" {
 }
 
 module "alb" {
-  source                    = "./load-balancer"
+  source                    = "./alb"
   lb_name                   = "dev-proj-1-alb"
   is_external               = false
   lb_type                   = "application"
@@ -95,7 +95,7 @@ module "alb" {
   lb_listner_default_action = "forward"
   lb_https_listner_port     = 443
   lb_https_listner_protocol = "HTTPS"
-  dev_proj_1_acm_arn        = module.aws_ceritification_manager.dev_proj_1_acm_arn
+  # dev_proj_1_acm_arn        = module.aws_ceritification_manager.dev_proj_1_acm_arn
   lb_target_group_attachment_port = 8080
 }
 
@@ -105,12 +105,13 @@ module "alb" {
   aws_lb_dns_name = module.alb.aws_lb_dns_name
   aws_lb_zone_id  = module.alb.aws_lb_zone_id
 }
-
+*/
 /*module "aws_ceritification_manager" {
   source         = "./certificate-manager"
   domain_name    = "Domain of choice"
   hosted_zone_id = module.hosted_zone.hosted_zone_id
 }
+*/
 ```
 
 <br/> Within this main.tf file the `Networking Module` establishes the foundational infrastructure by creating a VPC with assigned CIDR blocks for its IP range. It also defines public and private subnets within the VPC and specifies the availability zone for resource placement. These subnets and the VPC enable isolated and controlled networking for the application.
@@ -142,8 +143,11 @@ The `Application Load Balancer (ALB) Module` sets up a load balancer to distribu
 <br/> Now I will run `terraform apply --auto-approve` in order to automate the deployment of all the AWS resources. Afterwards the next step will be to create and configure a Jenkins CICD pipline to deploy the python flask application   <br/>
 
 <img src="https://github.com/user-attachments/assets/08c3527f-0275-4ca9-ad1b-b72a86edaeaf"/> 
+
 <br/> quick error, this stem from the fact that the `us_availability_zone` variable was not declared in my variables.tf file but one for an eu region instead which is why it is important to confirm all file confiurations prior to applying changes <br/>
 <br/> Now I will run the command again <br/>
+
+
 <img src=""/>
 
 <br/>  <br/>
