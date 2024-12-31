@@ -157,8 +157,9 @@ https://github.com/user-attachments/assets/215aba3d-8c66-46ea-a2ab-5acddfc0d279
 <br/> Now the AWS resources should be available within the AWS console: <br/> 
 
 <img src="https://github.com/user-attachments/assets/fd01d773-0165-44a7-88e1-df03a268deeb"/>
-<img src=""/>
-<img src=""/>
+<img src="https://github.com/user-attachments/assets/52b2329b-da8e-47c3-b6f0-48146f548fae"/>
+<img src="https://github.com/user-attachments/assets/13bc4a0d-1086-46fa-8801-194eecfa3c06"/>
+<img src="https://github.com/user-attachments/assets/c1d1112d-ebd9-4ba8-9e5c-4eb11cb708dd"/>
 
 
 ### Step :
