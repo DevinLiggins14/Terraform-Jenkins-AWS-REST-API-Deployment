@@ -167,6 +167,13 @@ https://github.com/user-attachments/assets/215aba3d-8c66-46ea-a2ab-5acddfc0d279
 
 <br/> Now the that entire AWS network has been created it is now time to create a Jenkins CICD Pipeline in order to deploy the Python flask REST API application <br/>
 
+
+<br/> Log into Jenkins (Note: if jenkins not installed on EC2 use docker) <br/>
+
+<img src="https://github.com/user-attachments/assets/bf5b26a3-0f95-4801-b51d-b130222b3d22"/>
+
+<br/> The way that Jenkins will be used is there will be a Jenkinsfile that will create a pipeline and the pipeline will execute the commands terraform init, plan, and apply. Once executed it will provision the entire infrastructure for the application. This includes the vpc, public and private subnets, igw, ec2 instance and REST API, and RDS to serve as a sql db to store app data. This will create the entire Python REST API within terraform within Jenkins, streamlining the process with automation.    <br/> 
+
 <img src=""/>
 
 <br/>  <br/>
