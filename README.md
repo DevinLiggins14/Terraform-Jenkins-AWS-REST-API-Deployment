@@ -137,9 +137,9 @@ The `Application Load Balancer (ALB) Module` sets up a load balancer to distribu
 
 <br/> For this project I am also using an S3 bucket for the terraform backend to store data. The S3 bucket provides a centralized, remote location for managing infrastructure state, enabling collaboration among team members and ensuring consistency. <br/> 
 
-## Step 3: 
+## Step 3: Create the AWS infrastucture 
 
-<br/>  <br/>
+<br/> Now I will run `terraform -auto-approve` in order to automate the deployment of all the AWS resources. Afterwards the next step will be to create and configure a Jenkins CICD pipline to deploy the python flask application   <br/>
 
 <img src=""/> 
 <br/> <br/>
