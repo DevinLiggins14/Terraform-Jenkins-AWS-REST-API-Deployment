@@ -139,10 +139,19 @@ The `Application Load Balancer (ALB) Module` sets up a load balancer to distribu
 
 ## Step 3: Create the AWS infrastucture 
 
-<br/> Now I will run `terraform -auto-approve` in order to automate the deployment of all the AWS resources. Afterwards the next step will be to create and configure a Jenkins CICD pipline to deploy the python flask application   <br/>
+<br/> Now I will run `terraform apply --auto-approve` in order to automate the deployment of all the AWS resources. Afterwards the next step will be to create and configure a Jenkins CICD pipline to deploy the python flask application   <br/>
 
-<img src=""/> 
-<br/> <br/>
+<img src="https://github.com/user-attachments/assets/08c3527f-0275-4ca9-ad1b-b72a86edaeaf"/> 
+<br/> quick error, this stem from the fact that the `us_availability_zone` variable was not declared in my variables.tf file but one for an eu region instead which is why it is important to confirm all file confiurations prior to applying changes <br/>
+<br/> Now I will run the command again <br/>
+<img src=""/>
+
+<br/>  <br/>
+
+<img src=""/>
+
+<br/>  <br/>
+
 
 ## Step :
 
