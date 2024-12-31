@@ -37,7 +37,7 @@
 
 
  ##  Step 1: Configure Terraform 
-<img src="https://github.com/user-attachments/assets/3386eb7e-3373-40d7-b5e4-7fc64f9023f8"/>
+<img src="https://github.com/user-attachments/assets/ea91aad3-2a94-41b0-9474-426ca7cefde3"/>
 
 <br/>  First we will use terraform to configure and create a VPC within AWS that will support and install Jenkins on an EC2 instance. <br/>
 <br/> We will use the following `main.tf` file to provision a modular, secure, and scalable infrastructure on AWS for hosting Jenkins with networking, security, and load balancing configurations. <br/> 
