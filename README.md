@@ -12,7 +12,7 @@
 In this project, we deploy a Python Flask application with REST API methods (GET, POST, DELETE, PATCH) to AWS. The infrastructure, including VPCs, subnets, RDS, and Elastic Load Balancers, is provisioned using Terraform. Deployment is automated through a Jenkins CI/CD pipeline, ensuring seamless integration and delivery.
 <br />
 <br/> Project Architecture: <br/>
-<img src=""/>
+<img src="https://github.com/user-attachments/assets/ad57931b-fdca-4f68-b35b-3f54590e05d1"/>
 <br/> We will  <br/>
 
 <h2> Services involved: </h2>
