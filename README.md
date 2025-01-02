@@ -1,7 +1,15 @@
-# Terraform-Jenkins-AWS-REST-API-Deployment
-<h2>Description</h2>
-<br/> In this project we will deploy 
+# Terraform-Jenkins-AWS-REST-API-Deployment  
+<p align="left"> 
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/terraform/terraform-original.svg" alt="terraform" width="60" height="60"/> 
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/jenkins/jenkins-original.svg" alt="jenkins" width="60" height="60"/> 
+  <img src="https://raw.githubusercontent.com/Thomas-George-T/Thomas-George-T/master/assets/aws.svg" alt="aws" width="60" height="60"/> 
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="60" height="60"/> 
+</p>
 
+
+<h2>Description</h2>
+<br/> 
+In this project, we deploy a Python Flask application with REST API methods (GET, POST, DELETE, PATCH) to AWS. The infrastructure, including VPCs, subnets, RDS, and Elastic Load Balancers, is provisioned using Terraform. Deployment is automated through a Jenkins CI/CD pipeline, ensuring seamless integration and delivery.
 <br />
 <br/> Project Architecture: <br/>
 <img src=""/>
@@ -131,7 +139,7 @@ The `Application Load Balancer (ALB) Module` sets up a load balancer to distribu
 
 ## Step 2: Initalize Terraform
 
-<br/> Once the necessary terraform modules, variables, and files have been correctly configured with the proper credentials ans AWS region it is now time to run terraform init. To follow along clone this repository into a local directory of choice and ensure the aws-key pair, iam user, and regions are correct. Also install the [aws cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) to run from CLI. <br/>
+<br/> Once the necessary terraform modules, variables, and files have been correctly configured with the proper credentials ans AWS region it is now time to run terraform init. To follow along clone this repository into a local directory of choice and ensure the iam user and regions are correct. Also install the [aws cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) to run from CLI. <br/>
 
 <img src="https://github.com/user-attachments/assets/e1e3350f-8678-42e1-8003-591446fbf543"/>
 
@@ -174,7 +182,7 @@ https://github.com/user-attachments/assets/215aba3d-8c66-46ea-a2ab-5acddfc0d279
 
 <img src="https://github.com/user-attachments/assets/bf5b26a3-0f95-4801-b51d-b130222b3d22"/>
 
-<br/> The way that Jenkins will be used is there will be a Jenkinsfile that will create a pipeline and the pipeline will execute the commands terraform init, plan, and apply. Once executed it will provision the entire infrastructure for the application. This includes the vpc, public and private subnets, igw, ec2 instance and REST API, and RDS to serve as a sql db to store app data. This will create the entire Python REST API within terraform within Jenkins, streamlining the process with automation. <br/> 
+<br/> The way that Jenkins will be used is there will be a Jenkinsfile that will create a pipeline and the pipeline will execute the commands terraform init, plan, and apply. Once executed it will provision the entire infrastructure for the application. This includes the vpc, public and private subnets, igw, ec2 instance, REST API, and RDS to serve as a sql DB to store app data. This will create the entire Python REST API with terraform within Jenkins, streamlining the process with automation. <br/> 
 
 <br/> The terraform files can be found worker_scripts/app_infrastructure similar to the previous terraform execution run git clone to follow along.  <br/>
 
