@@ -23,7 +23,10 @@ In this project, we deploy a Python Flask application with REST API methods (GET
 <br />
 <br/> Project Architecture: <br/>
 <img src="https://github.com/user-attachments/assets/ad57931b-fdca-4f68-b35b-3f54590e05d1"/>
-<br/> We will  <br/>
+<br/> In this project, we will deploy a Python Flask REST API on AWS using Terraform for infrastructure provisioning and Jenkins for automation. <br/> 
+<br/> The GitHub repository contains the application code, Terraform scripts, and a Jenkinsfile that automates the creation of AWS resources, including a VPC, subnets, an Application Load Balancer (ALB), EC2 instances, and an RDS database. <br/> <br/> Jenkins, hosted on an EC2 instance in the us-east-2 region, triggers the pipeline to provision infrastructure and deploy the API securely behind the ALB with optional HTTPS support. This architecture leverages public and private subnets, security groups, and a NAT gateway to ensure scalability, security, and efficient traffic routing. 
+
+  <br/>
 
 <h2> Services involved: </h2>
 
