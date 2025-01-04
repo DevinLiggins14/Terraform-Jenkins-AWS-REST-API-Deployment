@@ -199,6 +199,115 @@ https://github.com/user-attachments/assets/215aba3d-8c66-46ea-a2ab-5acddfc0d279
 
 <br/> The terraform files can be found worker_scripts/app_infrastructure similar to the previous terraform execution run git clone to follow along.  <br/>
 
+```main.tf
+/*module "s3" {
+  source      = "./s3"
+  bucket_name = var.bucket_name
+  name        = var.name
+  environment = var.bucket_name
+}*/
+
+module "networking" {
+  source               = "./networking"
+  vpc_cidr             = var.vpc_cidr
+  vpc_name             = var.vpc_name
+  cidr_public_subnet   = var.cidr_public_subnet
+  eu_availability_zone = var.eu_availability_zone
+  cidr_private_subnet  = var.cidr_private_subnet
+}
+
+module "security_group" {
+  source                     = "./security-groups"
+  ec2_sg_name                = "SG for EC2 to enable SSH(22) and HTTP(80)"
+  vpc_id                     = module.networking.dev_proj_1_vpc_id
+  public_subnet_cidr_block   = tolist(module.networking.public_subnet_cidr_block)
+  ec2_sg_name_for_python_api = "SG for EC2 for enabling port 5000"
+}
+
+module "ec2" {
+  source                   = "./ec2"
+  ami_id                   = var.ec2_ami_id
+  instance_type            = "t2.micro"
+  tag_name                 = "Ubuntu Linux EC2"
+  public_key               = var.public_key
+  subnet_id                = tolist(module.networking.dev_proj_1_public_subnets)[0]
+  sg_enable_ssh_https      = module.security_group.sg_ec2_sg_ssh_http_id
+  ec2_sg_name_for_python_api = module.security_group.sg_ec2_for_python_api
+  enable_public_ip_address = true
+  user_data_install_apache = templatefile("./template/ec2_install_apache.sh", {})
+}
+
+module "lb_target_group" {
+  source                   = "./load-balancer-target-group"
+  lb_target_group_name     = "dev-proj-1-lb-target-group"
+  lb_target_group_port     = 5000
+  lb_target_group_protocol = "HTTP"
+  vpc_id                   = module.networking.dev_proj_1_vpc_id
+  ec2_instance_id          = module.ec2.dev_proj_1_ec2_instance_id
+}
+
+module "alb" {
+  source                    = "./load-balancer"
+  lb_name                   = "dev-proj-1-alb"
+  is_external               = false
+  lb_type                   = "application"
+  sg_enable_ssh_https       = module.security_group.sg_ec2_sg_ssh_http_id
+  subnet_ids                = tolist(module.networking.dev_proj_1_public_subnets)
+  tag_name                  = "dev-proj-1-alb"
+  #lb_target_group_arn       = module.lb_target_group.dev_proj_1_lb_target_group_arn
+  ec2_instance_id           = module.ec2.dev_proj_1_ec2_instance_id
+  lb_listner_port           = 5000
+  lb_listner_protocol       = "HTTP"
+  lb_listner_default_action = "forward"
+  /* Commented out HTTPS configuration
+  lb_https_listner_port     = 443
+  lb_https_listner_protocol = "HTTPS"
+  #dev_proj_1_acm_arn        = module.aws_ceritification_manager.dev_proj_1_acm_arn
+  */
+  lb_target_group_attachment_port = 5000
+}
+
+/* Commented out Hosted Zone and Certification Manager
+module "hosted_zone" {
+  source          = "./hosted-zone"
+  domain_name     = var.domain_name
+  aws_lb_dns_name = module.alb.aws_lb_dns_name
+  aws_lb_zone_id  = module.alb.aws_lb_zone_id
+}
+
+module "aws_ceritification_manager" {
+  source         = "./certificate-manager"
+  domain_name    = var.domain_name
+  hosted_zone_id = module.hosted_zone.hosted_zone_id
+}
+*/
+
+module "rds_db_instance" {
+  source               = "./rds"
+  db_subnet_group_name = "dev_proj_1_rds_subnet_group"
+  subnet_groups        = tolist(module.networking.dev_proj_1_public_subnets)
+  rds_mysql_sg_id      = module.security_group.rds_mysql_sg_id
+  mysql_db_identifier  = "mydb"
+  mysql_username       = "dbuser"
+  mysql_password       = "dbpassword"
+  mysql_dbname         = "devprojdb"
+}
+```
+
+<br/> Within this `main.tf` file the `Networking Module` establishes the foundational infrastructure by creating a VPC with assigned CIDR blocks for its IP range. It also defines public and private subnets within the VPC and specifies the availability zone for resource placement. These subnets and the VPC enable isolated and controlled networking for the application.
+
+The `Security Group Module` configures access control by defining security groups. One security group permits SSH (port 22) and HTTP (port 80) traffic for general use, while another allows traffic specifically on port 5000 for a Python API. These security groups ensure that only authorized traffic can reach the resources in the VPC.
+
+The `EC2 Module` provisions an EC2 instance to host an Ubuntu Linux environment. It uses a predefined AMI and sets the instance type to `t2.micro`. The instance is placed in the first public subnet, and a public key is provided for secure SSH access. Security groups are attached to the instance to enforce network rules, and a user data script is executed during initialization to install Apache.
+
+The `Load Balancer Target Group Module` creates a target group to route HTTP traffic on port 5000 to the EC2 instance. This target group ensures that incoming requests are forwarded correctly within the VPC.
+
+The `Application Load Balancer (ALB) Module` sets up a load balancer to distribute traffic. It is configured as an internal application load balancer, attached to the public subnets, and secured with the appropriate security groups. The ALB listens on port 5000 (HTTP) and forwards traffic to the target group, which directs it to the EC2 instance. Configuration for HTTPS and certificate management is commented out, as these are not required for the current project.
+
+The `RDS Database Module` provisions a MySQL database instance for the application. The database is placed within a private subnet, ensuring its security. A NAT gateway is configured to allow the database to communicate with the EC2 instance hosting the Python Flask application, which resides in the public subnet. The module also attaches a security group to control access and configures the database with a name, username, and password. This setup ensures the database is securely integrated within the infrastructure. <br/>
+<br/> Also The `Certificate Manager and Domain Modules` are commented out in the `main.tf` file because they are optional for this project. These modules would be used to manage SSL certificates and set up a custom domain through Route 53, but they are not required for the current infrastructure. They can be enabled if needed for secure HTTPS access and custom domain configurations. <br/>
+
+
 
 
 <img src=""/>
