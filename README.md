@@ -427,8 +427,9 @@ The **Terraform Destroy** stage runs if the `DESTROY_TERRAFORM` parameter is tru
 
 This Jenkinsfile is a critical component of the project, enabling automated and secure deployment of the AWS infrastructure and Python Flask application. By integrating Terraform with Jenkins, it ensures a streamlined process for managing the project's resources. Sensitive information, such as AWS credentials, is handled securely, and the use of parameters allows for flexible execution of Terraform commands based on the project's requirements.
 
+<br/> In Jenkins select repository from SCM and paste this repositories URL. No credentials since this repo is public and choose main branch. Leave the script path as Jenkinsfile since it will be available right away <br/>
 
-<img src=""/>
+<img src="https://github.com/user-attachments/assets/a5196fa4-a395-42d2-b3f2-124684c9911f"/>
 
 ## Step :
 
