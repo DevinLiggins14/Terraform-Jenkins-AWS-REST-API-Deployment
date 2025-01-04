@@ -184,7 +184,7 @@ https://github.com/user-attachments/assets/215aba3d-8c66-46ea-a2ab-5acddfc0d279
 <img src="https://github.com/user-attachments/assets/1f4b157f-50a2-4999-ac83-f456885225a6"/>
 
 
-### Step 4: Create Jenkins CICD Pipeline
+### Step 4: Configure the main.tf files for the application
 
 <img src="https://github.com/user-attachments/assets/93aa1d05-931e-4bba-8a21-5a2be6bf1351"/>
 
@@ -310,24 +310,125 @@ The `RDS Database Module` provisions a MySQL database instance for the applicati
 
 
 
+## Step 5: Create the Jenkins CI/CD Pipeline 
+
+<br/> Before creating the CICD Pipline we must add a plugin so that jenkins will be able to use our AWS credentials. Navigate to manage jenkins --> plugins --> AWS steps <br/>
+
+<img src="https://github.com/user-attachments/assets/3ca3fae8-71a5-4c57-82aa-fe528a4cdab5"/> 
+<br/> Once all the plugins have been installed navigate to manage Jenkins and credentials. Next click on System --> Global credentials --> click add. From here select the option for AWS credentials:   <br/>
+
+<img src="https://github.com/user-attachments/assets/2f4aa47a-7e1c-4073-b42b-824226bfa816"/>
+<br/> For the ID select the user you would like to use within the Jenkinsfile under worker_scripts in this respository. Next fill out the users access key ID and secret access key from AWS. <br/>
+<img src="https://github.com/user-attachments/assets/276617ba-c5fb-460f-9695-68dc73e7c69a"/>
+
+<br/> Next choose create and go to the home page. Select new item and choose Pipline <br/>
+
+<img src="https://github.com/user-attachments/assets/f13dff6e-af65-4db0-95d3-ee1fbcb4eff5"/>
+
+<br/> Next we will enter the Jenkinsfile <br/> 
+
+```Groovy
+pipeline {
+    agent any
+
+    parameters {
+            booleanParam(name: 'PLAN_TERRAFORM', defaultValue: false, description: 'Check to plan Terraform changes')
+            booleanParam(name: 'APPLY_TERRAFORM', defaultValue: false, description: 'Check to apply Terraform changes')
+            booleanParam(name: 'DESTROY_TERRAFORM', defaultValue: false, description: 'Check to apply Terraform changes')
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                // Clean workspace before cloning (optional)
+                deleteDir()
+
+                // Clone the Git repository
+                git branch: 'main',
+                    url: 'https://github.com/DevinLiggins14/Terraform-Jenkins-AWS-REST-API-Deployment.git'
+
+                // Change directory to /worker_scripts/app_infrastructure
+                dir('/worker_scripts/app_infrastructure') {
+                    sh "ls -lart"
+                }
+            }
+        }
+
+        stage('Terraform Init') {
+            steps {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials-demo-user']]) {
+                    dir('/worker_scripts/app_infrastructure') {
+                        sh 'echo "=================Terraform Init=================="'
+                        sh 'terraform init'
+                    }
+                }
+            }
+        }
+
+        stage('Terraform Plan') {
+            steps {
+                script {
+                    if (params.PLAN_TERRAFORM) {
+                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials-demo-user']]) {
+                            dir('/worker_scripts/app_infrastructure') {
+                                sh 'echo "=================Terraform Plan=================="'
+                                sh 'terraform plan'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Terraform Apply') {
+            steps {
+                script {
+                    if (params.APPLY_TERRAFORM) {
+                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials-demo-user']]) {
+                            dir('/worker_scripts/app_infrastructure') {
+                                sh 'echo "=================Terraform Apply=================="'
+                                sh 'terraform apply -auto-approve'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Terraform Destroy') {
+            steps {
+                script {
+                    if (params.DESTROY_TERRAFORM) {
+                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials-demo-user']]) {
+                            dir('/worker_scripts/app_infrastructure') {
+                                sh 'echo "=================Terraform Destroy=================="'
+                                sh 'terraform destroy -auto-approve'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+The Jenkinsfile defines the CI/CD pipeline specifically for automating the deployment and management of the AWS-based infrastructure and the Python Flask application using Terraform. The pipeline uses the `agent any` directive, allowing it to execute on any available Jenkins agent. It includes three parameters: `PLAN_TERRAFORM`, `APPLY_TERRAFORM`, and `DESTROY_TERRAFORM`. These parameters provide control over the Terraform operations, allowing us to plan, apply, or destroy the infrastructure as needed for this project.
+
+The pipeline begins with the **Clone Repository** stage. Here, the workspace is cleaned to ensure no residual files from previous builds. This Git repository, which contains the Terraform configurations and application code, is cloned from the URL. The working directory is then changed to `/worker_scripts/app_infrastructure` to focus on the relevant infrastructure scripts for deploying the Python Flask API and AWS resources. This ensures that all subsequent stages operate within the correct context.
+
+In the **Terraform Init** stage, the pipeline securely injects AWS credentials we defined using the `withCredentials` block, referencing the `aws-credentials-demo-user`. This step initializes the Terraform configuration located in the `app_infrastructure` directory, preparing it to manage the project's AWS infrastructure. Initialization ensures that Terraform can interact with the AWS backend and state files, which are stored in the S3 bucket named `terraform-backend6`.
+
+The **Terraform Plan** stage checks if the `PLAN_TERRAFORM` parameter is enabled. If true, the pipeline injects AWS credentials securely and runs the `terraform plan` command within the `app_infrastructure` directory. This step generates an execution plan that details the changes Terraform will make to the AWS infrastructure. For this project, the plan outlines the creation or modification of resources such as the VPC, subnets, security groups, EC2 instance, load balancer, and RDS database, all of which are crucial for deploying the Python Flask API.
+
+In the **Terraform Apply** stage, the pipeline checks if the `APPLY_TERRAFORM` parameter is true. When enabled, AWS credentials are injected, and the `terraform apply -auto-approve` command is executed in the `app_infrastructure` directory. This command applies the infrastructure changes defined in the Terraform configuration. Specifically, it provisions the AWS resources, such as the EC2 instance running the Flask application, the ALB routing traffic to the target group, and the RDS database securely hosted in the private subnet.
+
+The **Terraform Destroy** stage runs if the `DESTROY_TERRAFORM` parameter is true. AWS credentials are securely injected, and the `terraform destroy -auto-approve` command is executed. This stage removes all AWS resources created by the Terraform configuration, ensuring a complete teardown of the project's infrastructure. This is particularly useful for cleaning up after testing or decommissioning the deployment.
+
+This Jenkinsfile is a critical component of the project, enabling automated and secure deployment of the AWS infrastructure and Python Flask application. By integrating Terraform with Jenkins, it ensures a streamlined process for managing the project's resources. Sensitive information, such as AWS credentials, is handled securely, and the use of parameters allows for flexible execution of Terraform commands based on the project's requirements.
+
+
 <img src=""/>
-
-<br/>  <br/>
-
-
-## Step :
-
-<br/>  <br/>
-
-<img src=""/> 
-<br/> <br/>
-
-## Step :
-
-<br/>  <br/>
-
-<img src=""/> 
-<br/> <br/>
 
 ## Step :
 
