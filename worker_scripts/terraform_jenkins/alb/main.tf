@@ -11,7 +11,7 @@ variable "lb_listner_protocol" {}
 variable "lb_listner_default_action" {}
 variable "lb_https_listner_port" {}
 variable "lb_https_listner_protocol" {}
-# variable "dev_proj_1_acm_arn" {}  # Commented out as per your request
+# variable "dev_proj_1_acm_arn" {}  # Commented out 
 variable "lb_target_group_attachment_port" {}
 
 output "aws_lb_dns_name" {
