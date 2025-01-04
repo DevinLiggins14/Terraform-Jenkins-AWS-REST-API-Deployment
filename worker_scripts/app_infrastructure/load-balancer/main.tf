@@ -14,13 +14,13 @@ variable "lb_listner_default_action" {}
 # variable "dev_proj_1_acm_arn" {}
 variable "lb_target_group_attachment_port" {}
 
-#output "aws_lb_dns_name" {
-#  value = aws_lb.dev_proj_1_lb.dns_name
-#}
+output "aws_lb_dns_name" {
+  value = aws_lb.dev_proj_1_lb.dns_name
+}
 
-#output "aws_lb_zone_id" {
-#  value = aws_lb.dev_proj_1_lb.zone_id
-#}
+output "aws_lb_zone_id" {
+  value = aws_lb.dev_proj_1_lb.zone_id
+}
 
 resource "aws_lb" "dev_proj_1_lb" {
   name               = var.lb_name
@@ -53,7 +53,7 @@ resource "aws_lb_listener" "dev_proj_1_lb_listner" {
   }
 }
 
-# HTTPS listener on port 443 (Optional)
+# HTTPS listener on port 443 (Commented out)
 # resource "aws_lb_listener" "dev_proj_1_lb_https_listner" {
 #   load_balancer_arn = aws_lb.dev_proj_1_lb.arn
 #   port              = var.lb_https_listner_port
