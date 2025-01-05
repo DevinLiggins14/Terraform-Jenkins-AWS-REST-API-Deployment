@@ -33,7 +33,7 @@ variable "cidr_private_subnet" {
   description = "Private Subnet CIDR values"
 }
 
-variable "eu_availability_zone" {
+variable "us_availability_zone" {
   type        = list(string)
   description = "Availability Zones"
 }
