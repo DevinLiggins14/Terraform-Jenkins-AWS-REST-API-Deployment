@@ -435,7 +435,6 @@ This Jenkinsfile is a critical component of the project, enabling automated and 
 
 <br/> All that's left is to select the newly created pipline and click `build now` <br/>
 
-<img src=""/> 
 
 <br/> Note: while troubleshooting this Jenkinsfile I had to remove the ls command after cloning the repository due to permissions and also using the jenkins workspace instead of `worker_scripts` because it was being misinterpreted to be local. This all resulted in an incomplete pipline:   <br/>
 
@@ -447,4 +446,10 @@ This Jenkinsfile is a critical component of the project, enabling automated and 
 <br/> I first had to install a terraform plugin then go to manage jenkins --> tools --> add terraform <br/>
 
 <img src="https://github.com/user-attachments/assets/b9dffb2b-0ec3-4254-bfe0-d3f206750e7e"/>
+
+<br/> The output was sucessful! <br/>
+
+<img src="https://github.com/user-attachments/assets/953e8293-0fc1-4498-8899-6ba4b2376065"/>
+<img src="https://github.com/user-attachments/assets/9980e934-7096-47fa-8514-68e18e2e46c3"/>
+
 
