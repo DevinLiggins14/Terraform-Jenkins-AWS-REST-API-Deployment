@@ -5,7 +5,7 @@ provider "aws" {
 variable "vpc_cidr" {}
 variable "vpc_name" {}
 variable "cidr_public_subnet" {}
-variable "us_east_2_availability_zone" {}
+variable "us_availability_zone" {}
 variable "cidr_private_subnet" {}
 
 output "dev_proj_1_vpc_id" {
