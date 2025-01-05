@@ -8,7 +8,7 @@ pipeline {
     }
 
     tools {
-        terraform 'Terraform'  // This is the name of the Terraform tool configured in Jenkins
+        terraform 'terraform'  // This is the name of the Terraform tool configured in Jenkins
     }
 
     stages {
