@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'hashicorp/terraform:latest'  // Use the Terraform Docker image
+            args '-u root'  // Optional: Run as root if needed for certain permissions
+        }
+    }
 
     parameters {
         booleanParam(name: 'PLAN_TERRAFORM', defaultValue: false, description: 'Check to plan Terraform changes')
@@ -10,12 +15,8 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                // Clean workspace before cloning (optional)
                 deleteDir()
-
-                // Clone the Git repository into the default workspace
-                git branch: 'main',
-                    url: 'https://github.com/DevinLiggins14/Terraform-Jenkins-AWS-REST-API-Deployment.git'
+                git branch: 'main', url: 'https://github.com/DevinLiggins14/Terraform-Jenkins-AWS-REST-API-Deployment.git'
             }
         }
 
