@@ -464,13 +464,36 @@ https://github.com/user-attachments/assets/d2decf02-7a1a-432f-a8c1-01063ad82d69
 <img src="https://github.com/user-attachments/assets/4bcbd1a3-928b-47e3-8393-a5ae387b94ab"/>
 
 
-<img src=""/>
+<br/> `terrafrom plan` stage <br/>
+
+https://github.com/user-attachments/assets/83597fa5-399b-4fb8-bc46-db0edac18f60
+
+
+<br/> `terrafrom apply` stage <br/>
+
+https://github.com/user-attachments/assets/a374caf4-5238-40dc-bc1e-04ead3e7e766
+
+<br/> the AWS reasources sucessfully provisioned in the `us-east-2` region: <br/> 
+
+<img src="https://github.com/user-attachments/assets/18be07af-b9e0-46b8-9354-f5ee8cc748f9"/>
+
+<img src="https://github.com/user-attachments/assets/ca517cab-4e71-4a76-82dd-d3f6f2e1eb51"/>
+
+<img src="https://github.com/user-attachments/assets/808e2af7-e838-4227-a38f-acb843ea7fd9"/>
+
+<img src="https://github.com/user-attachments/assets/745efa55-80d6-44f9-bc20-61517a715404"/>
+
+<img src="https://github.com/user-attachments/assets/eab96ef2-b623-4082-ae10-446326206bcf"/>
 
 
 <img src=""/>
 
+<br/> `terrafrom destroy` stage <br/>
 
-<img src=""/>
+
+https://github.com/user-attachments/assets/ea5c086d-5493-4ccc-88c9-8b1c4295dc69
+
+
 
 
 <img src=""/>
