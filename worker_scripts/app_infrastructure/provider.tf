@@ -1,5 +1,12 @@
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "5.70.0"
+    }
+  }
+}
+
 provider "aws" {
-  region                   = "us-east-2"  # Set the desired region
-  shared_credentials_files = ["~/.aws/credentials"]  # Path to credentials file
-  profile                  = "demo-user"  # Specify the profile name to use
+  region = "us-east-2"  # Set the desired region
 }
