@@ -19,7 +19,7 @@ pipeline {
 
                 // Change directory to /worker_scripts/app_infrastructure
                 dir('/worker_scripts/app_infrastructure') {
-                    sh "ls -lart"
+                    // ls command removed
                 }
             }
         }
