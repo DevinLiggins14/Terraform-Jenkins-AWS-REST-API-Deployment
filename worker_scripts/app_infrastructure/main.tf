@@ -33,7 +33,6 @@ module "lb_target_group" {
   lb_target_group_name     = "dev-proj-1-lb-target-group"
   lb_target_group_port     = 5000
   lb_target_group_protocol = "HTTP"
-  lb_target_group_arn       = module.lb_target_group.dev_proj_1_lb_target_group_arn
   vpc_id                   = module.networking.dev_proj_1_vpc_id
   ec2_instance_id          = module.ec2.dev_proj_1_ec2_instance_id
 }
