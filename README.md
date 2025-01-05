@@ -473,7 +473,7 @@ https://github.com/user-attachments/assets/83597fa5-399b-4fb8-bc46-db0edac18f60
 
 https://github.com/user-attachments/assets/a374caf4-5238-40dc-bc1e-04ead3e7e766
 
-<br/> the AWS reasources sucessfully provisioned in the `us-east-2` region: <br/> 
+<br/> A few of the AWS reasources sucessfully provisioned in the `us-east-2` region: <br/> 
 
 <img src="https://github.com/user-attachments/assets/18be07af-b9e0-46b8-9354-f5ee8cc748f9"/>
 
@@ -491,12 +491,13 @@ https://github.com/user-attachments/assets/a374caf4-5238-40dc-bc1e-04ead3e7e766
 <br/> `terrafrom destroy` stage <br/>
 
 
-https://github.com/user-attachments/assets/ea5c086d-5493-4ccc-88c9-8b1c4295dc69
 
 
+https://github.com/user-attachments/assets/c2e63bcc-8750-4e40-801e-0a2cc639ae6c
 
 
-<img src=""/>
+<br/> This completes the automation of the python flask application on an EC2 instance and the infrastcuture provided  
 
+In conclusion, this project showcases the seamless integration of Terraform, Jenkins, and AWS for automating the deployment of a Python Flask REST API. Using Terraform, we provision the necessary AWS infrastructure, including a VPC, subnets, an Application Load Balancer (ALB), EC2 instances, and an RDS database, all defined as code for reproducibility and scalability. The Jenkins pipeline automates the entire process, from provisioning resources to deploying the API, ensuring a smooth, repeatable deployment flow. Hosted on an EC2 instance in the us-east-2 region, Jenkins triggers the pipeline to deploy the application securely behind the ALB, with optional HTTPS support. This architecture emphasizes the power of Infrastructure-as-Code and Continuous Integration/Continuous Deployment (CI/CD) to manage and deploy applications efficiently and securely on AWS.
 
-<img src=""/>
+****
