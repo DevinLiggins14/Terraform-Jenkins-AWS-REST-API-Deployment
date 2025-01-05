@@ -6,7 +6,7 @@ resource "aws_lb_target_group" "dev_proj_1_lb_target_group" {
   name     = "dev-proj-1-lb-target-group"
   port     = var.lb_target_group_port
   protocol = "HTTP"
-#  vpc_id   = module.networking.dev_proj_1_vpc_id
+  vpc_id   = module.networking.dev_proj_1_vpc_id
 
   health_check {
     interval            = 30
