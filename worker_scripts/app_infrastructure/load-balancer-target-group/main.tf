@@ -1,4 +1,4 @@
-module "alb" {
+module "load-balancer" {
   source                    = "./load-balancer"
   lb_name                   = "dev-proj-1-alb"
   is_external               = false
