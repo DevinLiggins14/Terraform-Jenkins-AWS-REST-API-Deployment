@@ -440,6 +440,11 @@ This Jenkinsfile is a critical component of the project, enabling automated and 
 <br/> Note: while troubleshooting this Jenkinsfile I had to remove the ls command after cloning the repository due to permissions and also using the jenkins workspace instead of `worker_scripts` because it was being misinterpreted to be local. This all resulted in an incomplete pipline:   <br/>
 
 <img src="https://github.com/user-attachments/assets/a8fe6971-365d-4085-8673-1a427d1188b7"/>
+<img src="https://github.com/user-attachments/assets/80a604da-ff8b-4e77-83a6-428d07ede8eb"/>
 
-<br/> <br/>
+<br/> Upon inspecting the logs I can see terraform is not installed so I will install it using the global configuration tool <br/>
+
+<br/> I first had to install a terraform plugin then go to manage jenkins --> tools --> add terraform <br/>
+
+<img src="https://github.com/user-attachments/assets/b9dffb2b-0ec3-4254-bfe0-d3f206750e7e"/>
 
