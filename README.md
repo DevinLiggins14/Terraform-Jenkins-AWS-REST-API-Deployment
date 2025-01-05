@@ -459,9 +459,14 @@ https://github.com/user-attachments/assets/d2decf02-7a1a-432f-a8c1-01063ad82d69
 
 
 
-<img src=""/>
+<img src="https://github.com/user-attachments/assets/36f3703e-e22a-4b23-829c-c10782492193"/>
 
-<img src=""/>
+<br/> Now that the terraform files have been initalized now I can go step by step to plan, apply, and destroy the deployment <br/> 
+
+<img src="https://github.com/user-attachments/assets/2eb8b237-398b-4e91-958b-254c21be08f0"/>
+
+<br/> Troubleshooting each step of the way for the deployment. (Fixing variables .tf file mismatch) <br/>
+<img src="https://github.com/user-attachments/assets/4bcbd1a3-928b-47e3-8393-a5ae387b94ab"/>
 
 
 <img src=""/>
