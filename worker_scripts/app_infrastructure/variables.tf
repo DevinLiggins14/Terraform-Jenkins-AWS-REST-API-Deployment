@@ -6,11 +6,13 @@ variable "bucket_name" {
 variable "name" {
   type        = string
   description = "Tag name"
+  default     = "default_tag_name"  # Provide a default value
 }
 
 variable "environment" {
   type        = string
   description = "Environment name"
+  default     = "production"  # Provide a default value
 }
 
 variable "vpc_cidr" {
