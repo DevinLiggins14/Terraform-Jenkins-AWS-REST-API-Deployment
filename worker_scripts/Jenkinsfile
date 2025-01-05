@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        terraform 'terraform'  // This matches the name you gave in Global Tool Configuration
-    }
-
     parameters {
         booleanParam(name: 'PLAN_TERRAFORM', defaultValue: false, description: 'Check to plan Terraform changes')
         booleanParam(name: 'APPLY_TERRAFORM', defaultValue: false, description: 'Check to apply Terraform changes')
@@ -26,7 +22,7 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials-demo-user']]) {
-                    dir("${WORKSPACE}/app_infrastructure") {
+                    dir("${WORKSPACE}/worker_scripts/app_infrastructure") {
                         sh 'echo "=================Terraform Init=================="'
                         sh 'terraform init'
                     }
@@ -39,7 +35,7 @@ pipeline {
                 script {
                     if (params.PLAN_TERRAFORM) {
                         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials-demo-user']]) {
-                            dir("${WORKSPACE}/app_infrastructure") {
+                            dir("${WORKSPACE}/worker_scripts/app_infrastructure") {
                                 sh 'echo "=================Terraform Plan=================="'
                                 sh 'terraform plan'
                             }
@@ -54,7 +50,7 @@ pipeline {
                 script {
                     if (params.APPLY_TERRAFORM) {
                         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials-demo-user']]) {
-                            dir("${WORKSPACE}/app_infrastructure") {
+                            dir("${WORKSPACE}/worker_scripts/app_infrastructure") {
                                 sh 'echo "=================Terraform Apply=================="'
                                 sh 'terraform apply -auto-approve'
                             }
@@ -69,7 +65,7 @@ pipeline {
                 script {
                     if (params.DESTROY_TERRAFORM) {
                         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials-demo-user']]) {
-                            dir("${WORKSPACE}/app_infrastructure") {
+                            dir("${WORKSPACE}/worker_scripts/app_infrastructure") {
                                 sh 'echo "=================Terraform Destroy=================="'
                                 sh 'terraform destroy -auto-approve'
                             }
