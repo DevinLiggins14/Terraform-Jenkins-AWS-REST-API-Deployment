@@ -427,14 +427,19 @@ The **Terraform Destroy** stage runs if the `DESTROY_TERRAFORM` parameter is tru
 
 This Jenkinsfile is a critical component of the project, enabling automated and secure deployment of the AWS infrastructure and Python Flask application. By integrating Terraform with Jenkins, it ensures a streamlined process for managing the project's resources. Sensitive information, such as AWS credentials, is handled securely, and the use of parameters allows for flexible execution of Terraform commands based on the project's requirements.
 
-<br/> In Jenkins select repository from SCM and paste this repositories URL. No credentials since this repo is public and choose main branch. Leave the script path as Jenkinsfile since it will be available right away <br/>
+<br/> In Jenkins select repository from SCM and paste this repositories URL. No credentials since this repo is public and choose main branch. Leave the script path as `worker_scripts/Jenkinsfile` since it will be available right away <br/>
 
 <img src="https://github.com/user-attachments/assets/a5196fa4-a395-42d2-b3f2-124684c9911f"/>
 
-## Step :
+## Step 6: Deploy
 
-<br/>  <br/>
+<br/> All that's left is to select the newly created pipline and click `build now` <br/>
 
 <img src=""/> 
+
+<br/> Note: while troubleshooting this Jenkinsfile I had to remove the ls command after cloning the repository due to permissions and also using the jenkins workspace instead of `worker_scripts` because it was being misinterpreted to be local. This all resulted in an incomplete pipline:   <br/>
+
+<img src="https://github.com/user-attachments/assets/a8fe6971-365d-4085-8673-1a427d1188b7"/>
+
 <br/> <br/>
 
