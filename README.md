@@ -443,7 +443,7 @@ This Jenkinsfile is a critical component of the project, enabling automated and 
 
 <br/> Upon inspecting the logs I can see terraform is not installed so I will install it using the global configuration tool <br/>
 
-<br/> I first had to install a terraform plugin then go to manage jenkins --> tools --> add terraform <br/>
+<br/> I first had to install a terraform plugin then go to manage jenkins --> tools --> add terraform (select the correct Linux version) <br/>
 
 <img src="https://github.com/user-attachments/assets/b9dffb2b-0ec3-4254-bfe0-d3f206750e7e"/>
 
