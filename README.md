@@ -451,12 +451,7 @@ This Jenkinsfile is a critical component of the project, enabling automated and 
 
 https://github.com/user-attachments/assets/d2decf02-7a1a-432f-a8c1-01063ad82d69
 
-<img src="https://github.com/user-attachments/assets/953e8293-0fc1-4498-8899-6ba4b2376065"/>
-<img src="https://github.com/user-attachments/assets/9980e934-7096-47fa-8514-68e18e2e46c3"/>
-
-<br/> Now I can fully manage the applkication deployment from Jenkins successfully, fully automating the process <br/>
-
-
+<br/> Now I can fully manage the application deployment from Jenkins successfully, fully automating the process <br/>
 
 
 <img src="https://github.com/user-attachments/assets/36f3703e-e22a-4b23-829c-c10782492193"/>
