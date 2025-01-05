@@ -7,6 +7,10 @@ pipeline {
         booleanParam(name: 'DESTROY_TERRAFORM', defaultValue: false, description: 'Check to apply Terraform changes')
     }
 
+    tools {
+        terraform 'Terraform'  // This is the name of the Terraform tool configured in Jenkins
+    }
+
     stages {
         stage('Clone Repository') {
             steps {
