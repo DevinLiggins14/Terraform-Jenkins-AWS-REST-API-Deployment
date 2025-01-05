@@ -50,3 +50,43 @@ module "alb" {
   lb_listner_default_action = "forward"
   lb_target_group_attachment_port = 5000
 }
+
+variable "lb_target_group_arn" {
+  type        = string
+  description = "ARN of the load balancer target group"
+}
+
+variable "ec2_ami_id" {
+  type        = string
+  description = "AMI ID for the EC2 instance"
+}
+
+variable "public_key" {
+  type        = string
+  description = "Public key for EC2 instance"
+}
+
+variable "vpc_cidr" {
+  type        = string
+  description = "CIDR block for the VPC"
+}
+
+variable "vpc_name" {
+  type        = string
+  description = "Name for the VPC"
+}
+
+variable "cidr_public_subnet" {
+  type        = list(string)
+  description = "CIDR blocks for public subnets"
+}
+
+variable "us_availability_zone" {
+  type        = list(string)
+  description = "Availability zones for the VPC"
+}
+
+variable "cidr_private_subnet" {
+  type        = list(string)
+  description = "CIDR blocks for private subnets"
+}
