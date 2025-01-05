@@ -3,7 +3,7 @@ module "networking" {
   vpc_cidr             = var.vpc_cidr
   vpc_name             = var.vpc_name
   cidr_public_subnet   = var.cidr_public_subnet
-  us_availability_zone = var.us_availability_zone
+  eu_availability_zone = var.eu_availability_zone
   cidr_private_subnet  = var.cidr_private_subnet
 }
 
@@ -28,11 +28,13 @@ module "ec2" {
   user_data_install_apache = templatefile("./template/ec2_install_apache.sh", {})
 }
 
-module "load_balancer_target_group" {
-  source               = "./load-balancer-target-group"  # Corrected to relative path
-  lb_target_group_arn  = var.lb_target_group_arn
-  ec2_instance_id      = module.ec2.dev_proj_1_ec2_instance_id
-  lb_target_group_port = 5000
+module "lb_target_group" {
+  source                   = "./load-balancer-target-group"
+  lb_target_group_name     = "dev-proj-1-lb-target-group"
+  lb_target_group_port     = 5000
+  lb_target_group_protocol = "HTTP"
+  vpc_id                   = module.networking.dev_proj_1_vpc_id
+  ec2_instance_id          = module.ec2.dev_proj_1_ec2_instance_id
 }
 
 module "alb" {
@@ -43,50 +45,37 @@ module "alb" {
   sg_enable_ssh_https       = module.security_group.sg_ec2_sg_ssh_http_id
   subnet_ids                = tolist(module.networking.dev_proj_1_public_subnets)
   tag_name                  = "dev-proj-1-alb"
-  lb_target_group_arn       = module.load_balancer_target_group.dev_proj_1_lb_target_group_arn
+  lb_target_group_arn       = module.lb_target_group.dev_proj_1_lb_target_group_arn
   ec2_instance_id           = module.ec2.dev_proj_1_ec2_instance_id
   lb_listner_port           = 5000
   lb_listner_protocol       = "HTTP"
   lb_listner_default_action = "forward"
+  lb_https_listner_port     = 443
+  lb_https_listner_protocol = "HTTPS"
+  dev_proj_1_acm_arn        = module.aws_ceritification_manager.dev_proj_1_acm_arn
   lb_target_group_attachment_port = 5000
 }
-
-variable "lb_target_group_arn" {
-  type        = string
-  description = "ARN of the load balancer target group"
+*/
+module "hosted_zone" {
+  source          = "./hosted-zone"
+  domain_name     = var.domain_name
+  aws_lb_dns_name = module.alb.aws_lb_dns_name
+  aws_lb_zone_id  = module.alb.aws_lb_zone_id
 }
 
-variable "ec2_ami_id" {
-  type        = string
-  description = "AMI ID for the EC2 instance"
+module "aws_ceritification_manager" {
+  source         = "./certificate-manager"
+  domain_name    = var.domain_name
+  hosted_zone_id = module.hosted_zone.hosted_zone_id
 }
-
-variable "public_key" {
-  type        = string
-  description = "Public key for EC2 instance"
-}
-
-variable "vpc_cidr" {
-  type        = string
-  description = "CIDR block for the VPC"
-}
-
-variable "vpc_name" {
-  type        = string
-  description = "Name for the VPC"
-}
-
-variable "cidr_public_subnet" {
-  type        = list(string)
-  description = "CIDR blocks for public subnets"
-}
-
-variable "us_availability_zone" {
-  type        = list(string)
-  description = "Availability zones for the VPC"
-}
-
-variable "cidr_private_subnet" {
-  type        = list(string)
-  description = "CIDR blocks for private subnets"
+*/
+module "rds_db_instance" {
+  source               = "./rds"
+  db_subnet_group_name = "dev_proj_1_rds_subnet_group"
+  subnet_groups        = tolist(module.networking.dev_proj_1_private_subnets)
+  rds_mysql_sg_id      = module.security_group.rds_mysql_sg_id
+  mysql_db_identifier  = "mydb"
+  mysql_username       = "dbuser"
+  mysql_password       = "dbpassword"
+  mysql_dbname         = "devprojdb"
 }
