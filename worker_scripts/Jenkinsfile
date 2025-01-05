@@ -17,6 +17,11 @@ pipeline {
                 git branch: 'main',
                     url: 'https://github.com/DevinLiggins14/Terraform-Jenkins-AWS-REST-API-Deployment.git'
 
+                // Ensure the /worker_scripts directory has the correct permissions
+                script {
+                    sh 'chmod -R 777 /worker_scripts'
+                }
+
                 // Change directory to /worker_scripts/app_infrastructure
                 dir('/worker_scripts/app_infrastructure') {
                     // ls command removed
